@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico')}}" type="image/x-icon">
+    <title>GoodBurger - Profile page</title>
+</head>
+<body>
+{%  if app.session.get('username') is null %}
+    <span style="color: red;font-size: 18px"> You need to login , to access to this page !</span>
+{% else %}
+<div id="header">
+    <div class="container">
+        <div id="logo">
+            <a href="{{ path('core_homepage') }}"><img src="{{ asset('images/goodburger.jpg')}}" alt=""/></a>
+        </div>
+        <div id="nav">
+            <a href="{{ path('core_homepage') }}">Home</a>
+            <a href="{{ path('profile_route') }}">Profile</a>
+            {%  if app.session.get('userRole') == 'admin' %}
+                <a href="{{ path('admin_route') }}">Administration</a>
+            {% endif %}
+            <a href="{{ path('logout_route') }}">Logout</a>
+        </div>
+
+        <div id="cart">
+            <a href="{{ path('cart_route') }}"><img src="{{ asset('images/cart.png') }}" alt=""/></a>
+            <span>{{ app.session.get('basket')|length }}</span>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <div id="profile">
+        <div id="userProducts">
+            <h2></h2>
+            <img src="{{ asset('images/user.png') }}" style="width: 550px;margin-top: 0%">
+        </div>
+        <div id="userInfos">
+            <h2 style="margin-left: 25%">Personal informations</h2>
+            <form action="{{ path('updatePersonalInfo_route') }}" method="post">
+                <input type="text" class="input" value="{{ app.session.get('username')|capitalize }}" name="username" />
+                <input type="submit" value="Update" class="btn1" style="display: inline !important;" />
+                <a href="{{ path('deleteUser_route', { 'id': app.session.get('userId') }) }}" style="text-decoration: none"><input type="button" value="Delete account" class="btn3" style="display: inline !important;"/></a>
+            </form>
+            <h2>Security informations</h2>
+            <form action="{{ path('updateSecurityInfo_route') }}" method="post">
+                <input type="password" class="input" placeholder="Old password" name="opassword" required />
+                <input type="password" class="input" placeholder="New password" name="npassword" required />
+                <input type="password" class="input" placeholder="Confirmation password" name="cpassword" required />
+                <input type="submit" value="Update" class="btn1" />
+
+            </form>
+
+            {% if error is defined %}
+                {% if error == 0 %}
+                    <p style='color:green'>Password updated</p>
+                {% elseif error == 1 %}
+                    <p style='color:red'>Old passwrod error</p>
+                {% elseif error == 2%}
+                    <p style='color:red'>Confirmation password error</p>
+                {% endif %}
+            {% endif %}
+
+
+
+
+        </div>
+
+    </div>
+</div>
+<div id="footer">
+    <div class="container">
+        <p>All rights reserver &copy; GoodBurger 2018</p>
+    </div>
+</div>
+
+<script src="{{ asset('js/jquery-3.2.1.min.js')}}" type="text/javascript"></script>
+<script>
+
+
+</script>
+</body>
+</html>
+{% endif %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoodBurger - Best Burgers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico')}}" type="image/x-icon">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <div id="logo">
+            <a href="{{ path('core_homepage') }}"><img src="{{ asset('images/goodburger.jpg') }}" alt=""/></a>
+        </div>
+        <div id="nav">
+            <a href="{{ path('core_homepage') }}">Home</a>
+            <a href="{{ path('profile_route') }}">Profile</a>
+            {%  if app.session.get('userRole') == 'admin' %}
+                <a href="{{ path('admin_route') }}">Administration</a>
+            {% endif %}
+            <a href="{{ path('logout_route') }}">Logout</a>
+        </div>
+
+        <div id="cart">
+            <a href="{{ path('cart_route') }}"><img src="{{ asset('images/cart.png') }}" alt=""/></a>
+            <span>{{ app.session.get('basket')|length }}</span>
+        </div>
+    </div>
+</div>
+<div style="text-align: center;"><h1>Dashboard</h1></div>
+<div id="content">
+    <div id="company">
+        <img src="{{ asset('images/banner.jpg') }}" style="width: 160px !important;height: 600px !important;" />
+    </div>
+
+    <div id="products">
+
+
+        <div class="product">
+            <a href="{{ path('admin_users_route') }}"><img class="city-img" src="{{ asset('images/user.png')}}" /></a>
+            <p>Users</p>
+            <a href="{{ path('admin_users_route') }}" class="btn2">Select</a>
+        </div>
+        <div class="product">
+            <a href="{{ path('admin_companies_route') }}"><img class="city-img" src="{{ asset('images/goodburger.jpg')}}"  /></a>
+            <p>Companies</p>
+            <a href="{{ path('admin_companies_route') }}" class="btn2">Select</a>
+        </div>
+        <div class="product">
+            <a href="{{ path('admin_products_route') }}"><img class="city-img" src="{{ asset('images/prod.jpg')}}"  /></a>
+            <p>Products</p>
+            <a href="{{ path('admin_products_route') }}" class="btn2">Select</a>
+        </div>
+        <div class="product">
+            <a href="{{ path('admin_orders_route') }}"><img class="city-img" src="{{ asset('images/order.png')}}"  /></a>
+            <p>Orders</p>
+            <a href="{{ path('admin_orders_route') }}" class="btn2">Select</a>
+        </div>
+
+
+    </div>
+</div>
+<div id="footer">
+    <div class="container">
+        <p>All rights reserved &copy; GoodBurger 2018</p>
+    </div>
+</div>
+
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
+<script>
+
+
+</script>
+</body>
+</html>

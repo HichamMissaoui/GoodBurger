@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoodBurger - Best Burgers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico')}}" type="image/x-icon">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <div id="logo">
+            <a href="{{ path('core_homepage') }}"><img src="{{ asset('images/goodburger.jpg') }}" alt=""/></a>
+        </div>
+        <div id="nav">
+            <a href="{{ path('core_homepage') }}">Home</a>
+            {%  if app.session.get('username') is not null %}
+
+                <a href="{{ path('profile_route') }}">Profile</a>
+                {%  if app.session.get('userRole') == 'admin' %}
+                    <a href="{{ path('admin_route') }}">Administration</a>
+                {% endif %}
+                <a href="{{ path('logout_route') }}">Logout</a>
+            {% else %}
+                <a href="{{ path('register_route') }}">Login</a>
+                <a href="{{ path('register_route') }}">SignIn</a>
+
+
+            {% endif %}
+        </div>
+
+        <div id="cart">
+            <a href="{{ path('cart_route') }}"><img src="{{ asset('images/cart.png') }}" alt=""/></a>
+            <span>{{ app.session.get('basket')|length }}</span>
+        </div>
+    </div>
+</div>
+<div style="text-align: center;"><h1>Welcome to GoodBurger restaurants</h1></div>
+<div id="content">
+    <div id="company">
+        <img src="{{ asset('images/banner.jpg') }}" style="width: 160px !important;height: 600px !important;" />
+    </div>
+
+    <div id="products">
+
+        {% for company in companies %}
+        <div class="product">
+            <a href="{{ path('company_homepage', { 'companyId': company.id }) }}"><img class="city-img" src="{{ asset('images/goodburger.jpg')}}" /></a>
+            <p>{{ company.city|capitalize }}</p>
+            <a href="{{ path('company_homepage', { 'companyId': company.id }) }}" class="btn2">Select</a>
+        </div>
+        {% endfor %}
+
+
+
+    </div>
+</div>
+<div id="footer">
+    <div class="container">
+        <p>All rights reserved &copy; GoodBurger 2018</p>
+
+    </div>
+</div>
+
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
+<script>
+
+
+</script>
+</body>
+</html>

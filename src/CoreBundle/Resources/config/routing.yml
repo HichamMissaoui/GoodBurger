@@ -1,0 +1,171 @@
+core_homepage:
+    path:     /
+    defaults: { _controller: CoreBundle:Home:index }
+
+company_homepage:
+    path:     /company
+    defaults: { _controller: CoreBundle:Company:home }
+
+
+login_route:
+    path:     /login
+    defaults: { _controller: CoreBundle:User:login }
+
+logout_route:
+    path:     /logout
+    defaults: { _controller: CoreBundle:User:logout }
+
+register_route:
+    path:     /register
+    defaults: { _controller: CoreBundle:User:register }
+
+signin_route:
+    path:     /signin
+    defaults: { _controller: CoreBundle:User:signin }
+
+profile_route:
+    path:     /profile
+    defaults: { _controller: CoreBundle:User:profile }
+
+cart_route:
+    path:     /cart
+    defaults: { _controller: CoreBundle:Cart:cart }
+
+updatePersonalInfo_route:
+    path:     /updatePersonal
+    defaults: { _controller: CoreBundle:User:updatePersonalInfo }
+
+updateSecurityInfo_route:
+    path:     /updateSecurity
+    defaults: { _controller: CoreBundle:User:updateSecurityInfo }
+
+deleteUser_route:
+    path:     /delete-user
+    defaults: { _controller: CoreBundle:User:deleteUser }
+
+
+
+admin_route:
+    path:     /admin
+    defaults: { _controller: CoreBundle:Admin:admin }
+
+admin_users_route:
+    path:     /admin/users
+    defaults: { _controller: CoreBundle:Admin:users }
+
+admin_companies_route:
+    path:     /admin/companies
+    defaults: { _controller: CoreBundle:Admin:companies }
+
+admin_company_route:
+    path:     /admin/company
+    defaults: { _controller: CoreBundle:Admin:company }
+
+
+admin_products_route:
+    path:     /admin/products
+    defaults: { _controller: CoreBundle:Admin:products }
+
+admin_product_detail_route:
+    path:     /admin/product/detail
+    defaults: { _controller: CoreBundle:Admin:getProductDetail }
+
+admin_product_change_stock_route:
+    path:     /admin/product/stock-update
+    defaults: { _controller: CoreBundle:Admin:changeProductStock }
+
+admin_product_manage_route:
+    path:     /admin/product/manage
+    defaults: { _controller: CoreBundle:Admin:manageProduct }
+
+admin_product_update_informations_route:
+    path:     /admin/product/update
+    defaults: { _controller: CoreBundle:Admin:updateProduct }
+
+admin_product_update_companies_availability_route:
+    path:     /admin/product/update-companies
+    defaults: { _controller: CoreBundle:Admin:updateProductCompanies }
+
+
+admin_delete_product_route:
+    path:     /admin/product/delete
+    defaults: { _controller: CoreBundle:Admin:deleteProduct }
+
+admin_orders_route:
+    path:     /admin/orders
+    defaults: { _controller: CoreBundle:Admin:orders }
+
+addAdmin_route:
+    path:     /admin/add-admin
+    defaults: { _controller: CoreBundle:Admin:addAdmin }
+
+removeAdmin_route:
+    path:     /admin/remove-admin
+    defaults: { _controller: CoreBundle:Admin:removeAdmin }
+
+blockUser_route:
+    path:     /admin/block-user
+    defaults: { _controller: CoreBundle:Admin:blockUser }
+
+unBlockUser_route:
+    path:     /admin/unBlock-user
+    defaults: { _controller: CoreBundle:Admin:unBlockUser }
+
+delete_company_route:
+    path:     /admin/delete-company
+    defaults: { _controller: CoreBundle:Company:deleteCompany }
+
+add_company_route:
+    path:     /admin/add-company
+    defaults: { _controller: CoreBundle:Company:add }
+
+add_product_route:
+    path:     /admin/add-product
+    defaults: { _controller: CoreBundle:Product:add }
+
+
+update_company_route:
+    path:     /company/update
+    defaults: { _controller: CoreBundle:Company:update }
+
+delete_company_product_route:
+    path:     /company/delete-product
+    defaults: { _controller: CoreBundle:Company:deleteProduct }
+
+
+product_detail_route:
+    path:     /product/detail
+    defaults: { _controller: CoreBundle:Product:detail }
+
+session_route:
+    path:     /session
+    defaults: { _controller: CoreBundle:User:session }
+
+add_product_cart_route:
+    path:     /cart/add
+    defaults: { _controller: CoreBundle:Cart:add }
+
+cart_delete_product_route:
+    path:     /cart/delete-product
+    defaults: { _controller: CoreBundle:Cart:deleteProduct }
+
+cart_change_product__quantity_route:
+    path:     /cart/update-product-quantity
+    defaults: { _controller: CoreBundle:Cart:changeProductQuantity }
+
+checkout_route:
+    path:     /checkout
+    defaults: { _controller: CoreBundle:Order:checkout }
+
+checkout_route:
+    path:     /checkout
+    defaults: { _controller: CoreBundle:Order:checkout }
+
+checkout_information_route:
+    path:     /checkout/information
+    defaults: { _controller: CoreBundle:Order:checkoutInformation }
+
+checkout_confirmation_route:
+    path:     /checkout/confirmation
+    defaults: { _controller: CoreBundle:Order:checkoutConfirmation }
+

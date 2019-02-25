@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoodBurger - Best Burgers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico')}}" type="image/x-icon">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <div id="logo">
+            <a href="{{ path('core_homepage') }}"><img src="{{ asset('images/goodburger.jpg') }}" alt=""/></a>
+        </div>
+        <div id="nav">
+            {%  if app.session.get('username') is not null %}
+                <a href="{{ path('core_homepage') }}">Home</a>
+                <a href="{{ path('profile_route') }}">Profile</a>
+                {%  if app.session.get('userRole') == 'admin' %}
+                    <a href="{{ path('admin_route') }}">Administration</a>
+                {% endif %}
+                <a href="{{ path('logout_route') }}">Logout</a>
+            {% else %}
+                <form action="{{ path('login_route') }}" method="post">
+                    <input type="text" name="username" placeholder="username">
+                    <input type="password" name="password" placeholder="password">
+                    <input type="submit" value="Login">
+                    <a href="{{ path('register_route') }}"> <input type="button" value="Sign In"></a>
+                </form>
+            {% endif %}
+        </div>
+
+        <div id="cart">
+            <a href="{{ path('cart_route') }}"><img src="{{ asset('images/cart.png') }}" alt=""/></a>
+            <span>{{ app.session.get('basket')|length }}</span>
+        </div>
+    </div>
+</div>
+<div style="text-align: center;"><h1>{{ title }} ({{ products|length  }})</h1>
+    <input type="button" id="createProduct" value="Add new Product" class="btn1" style="margin-bottom: 20px">
+    <form action="{{ path('admin_products_route') }}" method="post">
+        <select name="companyId">
+            <option value="0"  selected>Display product by city</option>
+            {% for company in companies %}
+            <option value="{{ company.id }}">{{ company.city|capitalize }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Go" >
+    </form>
+
+</div>
+<div style="margin-left: 21%">
+    <a href="{{ path('admin_route') }}" style="text-decoration: none">
+        <input type="button" value="Go back" class="btn1" style="display: inline !important;"  />
+    </a>
+</div>
+
+<div id="content">
+    <div id="company">
+        <img src="{{ asset('images/banner.jpg') }}" style="width: 160px !important;height: 600px !important;" />
+    </div>
+
+    <div id="products">
+
+            {% for product in products %}
+            <div class="product">
+
+                <h1>{{ product.price }} EURO</h1>
+                <img src="{{ asset(product.picture)}}" class="city-img" />
+                <p>{{ product.name }}</p>
+                <a href="{{ path('admin_product_manage_route', {'productId' : product.id}) }}" class="btn1">Manage</a>
+                <a href="{{ path('admin_delete_product_route', {'productId' : product.id}) }}" class="btn3">Delete</a>
+            </div>
+        {% endfor %}
+
+
+
+
+    </div>
+</div>
+<div id="footer">
+    <div class="container">
+        <p>All rights reserved &copy; GoodBurger 2018</p>
+    </div>
+</div>
+<div id="popupProduct" class="popup">
+    <img src="{{ asset('images/close.png') }}" alt=""/>
+    <div id="productwindow">
+        <h3>Create a new product</h3>
+        <form action="{{ path('add_product_route') }}" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" class="input" placeholder="Name" required/>
+        <input type="text" name="price" class="input" placeholder="Price" required />
+            <textarea name="description" rows="10" cols="33" placeholder="description" name="description" required></textarea><br>
+            <br>
+            <h3>Availability</h3>
+            {% for company in companies %}
+                <label>{{ company.city|capitalize }} </label>
+                <input type="checkbox" value="{{ company.id }}" name="company_list[]" style="display: inline !important;margin-right: 25px;" >
+            {% endfor %}
+            Category :
+            <select name="category" required>
+                <option value="burger">Burger</option>
+                <option value="drink">Drink</option>
+                <option value="chips">Chips</option>
+            </select>
+            <br><br>
+            <h3>Product Image</h3>
+        <input type="file" class="input" name="productImage" required/>
+        <input type="submit" class="btn1" value="Create Product" />
+        </form>
+    </div>
+</div>
+
+
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
+<script>
+
+    $("#createProduct").click(function () {
+        $("#popupProduct").fadeIn();
+    });
+
+    $(".popup img").click(function () {
+        $(this).parent("div").fadeOut();
+    });
+
+</script>
+</body>
+</html>

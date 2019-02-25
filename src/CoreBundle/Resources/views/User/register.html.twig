@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoodBurger - Login | Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('css/general.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <div id="logo">
+            <a href="{{ path('core_homepage') }}"><img src="{{ asset('images/goodburger.jpg') }}" alt=""/></a>
+        </div>
+        <div id="nav">
+            {%  if app.session.get('username') is not null %}
+            <a href="profile.jsp">{{ app.session.get('username') }}</a>
+            <a href="{{ path('logout_route') }}">Logout</a>
+            {% else %}
+                <form action="{{ path('login_route') }}" method="post">
+                    <input type="text" name="username" placeholder="username">
+                    <input type="password" name="password" placeholder="password">
+                    <input type="submit" value="Login">
+                </form>
+                {# On affiche tous les messages flash dont le nom est « error » #}
+                {% for message in app.session.flashbag.get('error') %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div id="cart">
+            <a href="{{ path('cart_route') }}"><img src="{{ asset('images/cart.png') }}" alt=""/></a>
+            <span>{{ app.session.get('basket')|length }}</span>
+        </div>
+    </div>
+</div>
+<form action="{{ path('signin_route') }}" method="post">
+    <div class="container2">
+        <div style="margin-left: 40%;width: 500px;height: 400px">
+            <h1>Register</h1>
+            <p>Please fill in this form to create an account.</p>
+            {% for message in app.session.flashbag.get('signError') %}
+                <p style="color: red;font-size: 18px">{{ message }}</p>
+            {% endfor %}
+            <hr>
+
+            <label for="email"><b>Username*</b></label><br>
+            <input type="text" placeholder="Enter username" name="username" required><br>
+
+            <label for="psw"><b>Password*</b></label><br>
+            <input type="password" placeholder="Enter Password" name="password" required><br>
+
+
+            <label for="psw-repeat"><b>Repeat Password*</b></label><br>
+            <input type="password" placeholder="Repeat Password" name="confirmPassword" required><br>
+
+            <hr>
+            <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+            <button type="submit" class="registerbtn">Register</button>
+        </div>
+    </div>
+
+
+</form>
+<div id="footer">
+    <div class="container">
+        <p>All rights reserved &copy; GoodBurger 2018</p>
+    </div>
+</div>
+
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
+<script>
+
+</script>
+</body>
+</html>
